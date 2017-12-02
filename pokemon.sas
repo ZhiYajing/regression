@@ -21,6 +21,36 @@ DefLeg=Defense*d2Legendary;DefGen2=Defense*d8Gen2;DefGen4=Defense*d10Gen4;
 SpAtkLeg=Sp_Atk*d2Legendary;SpAtkGen2=Sp_Atk*d8Gen2;SpAtkGen4=Sp_Atk*d10Gen4;
 SpDefLeg=Sp_Def*d2Legendary;SpDefGen2=Sp_Def*d8Gen2;SpDefGen4=Sp_Def*d10Gen4;
 SpeedLeg=Speed*d2Legendary;SpeedGen2=Speed*d8Gen2;SpeedGen4=Speed*d10Gen4;
+/*Quadratic term Second order*/
+HP_Sq = HP*HP;
+Attack_Sq = Attack*Attack;
+Defense_Sq =Defense*Defense;
+SpAtk_Sq =Sp_Atk*Sp_Atk;
+SpDef_Sq =Sp_Def*Sp_Def;
+Speed_Sq =Speed*Speed;
+/*Interaction Numerical term Second order*/
+HPAtt=HP*Attack;
+HPDef=HP*Defense;
+HPSpAtk=HP*Sp_Atk;
+HPSpDef=HP*Sp_Def;
+HPSpeed=HP*Speed;
+AttDef=Attack*Defense ;
+AttSpAtk=Attack *Sp_Atk;
+AttSpDef=Attack *Sp_Def;
+AttSpeed=Attack*Speed;
+DefSpAtk= Defense*Sp_Atk;
+DefSpDef= Defense*Sp_Def;
+DefSpeed=Defense*Speed;
+SpAtkSpDef= Sp_Atk*Sp_Def;
+SpAtkSpeed=Sp_Atk*Speed;
+SpDefSpeeds=Sp_Def*Speed;
+/* Interaction Numerical and Dummy term Second order */
+HP_SqLeg= HP_SqGen2=  HP_SqGen4=
+Attack_SqLeg=  Attack_SqGen2= Attack_SqGen4=
+Defense_SqLeg=  Defense_SqGen2= Defense_SqGen4=
+SpAtk_SqLeg=  SpAtk_SqGen2= SpAtk_SqGen4=
+Sp_Def_SqLeg=   Sp_Def_SqGen2= Sp_Def_SqGen4=
+Speed_SqLeg= Speed_SqGen2= Speed_SqGen4=
 
 datalines;
 1	Bulbasaur	2	318	45	49	49	65	65	45	1	FALSE	TRUE	2	FALSE	0.71	6.9	45
@@ -773,5 +803,13 @@ First_Inter: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendar
 model  Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4
 	SpeedGen2 ;
 */
+Second_Main: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4
+	HP_Sq Attack_Sq Defense_Sq SpAtk_Sq Sp_Def_Sq  Speed_Sq;
+Second_Inter: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4
+	HP_Sq Attack_Sq Defense_Sq SpAtk_Sq Sp_Def_Sq  Speed_Sq
+	HPAtt HPDef HPSpAtk HPSpDef HPSpeed AttDef AttSpAtk AttSpDef AttSpeed DefSpAtk DefSpDef DefSpeed 
+    SpAtkSpDef SpAtkSpeed SpDefSpeeds
+;
+
 	run;
 

@@ -8,19 +8,31 @@ if hasGender="TRUE" then d3Gender=1; else d3Gender=0;
 if Egg_Group="0" then d4Egg0=1; else d4Egg0=0;
 if Egg_Group="1" then d5Egg1=1; else d5Egg1=0;
 if hasMegaEvolution="TRUE" then d6Mega=1; else d6Mega=0;
-if Generation="1" then d7Gen1=1; else d7Gen1=0;
-if Generation="2" then d8Gen2=1; else d8Gen2=0;
-if Generation="3" then d9Gen3=1; else d9Gen3=0;
-if Generation="4" then d10Gen4=1; else d10Gen4=0;
-if Generation="5" then d11Gen5=1; else d11Gen5=0;
+
 /*HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4*/
 /*Interaction term First order*/
-HPLeg=HP*d2Legendary;HPGen2=HP*d8Gen2;HPGen4=HP*d10Gen4;
-AttLeg=Attack*d2Legendary;AttGen2=Attack*d8Gen2;AttGen4=Attack*d10Gen4;
-DefLeg=Defense*d2Legendary;DefGen2=Defense*d8Gen2;DefGen4=Defense*d10Gen4;
-SpAtkLeg=Sp_Atk*d2Legendary;SpAtkGen2=Sp_Atk*d8Gen2;SpAtkGen4=Sp_Atk*d10Gen4;
-SpDefLeg=Sp_Def*d2Legendary;SpDefGen2=Sp_Def*d8Gen2;SpDefGen4=Sp_Def*d10Gen4;
-SpeedLeg=Speed*d2Legendary;SpeedGen2=Speed*d8Gen2;SpeedGen4=Speed*d10Gen4;
+HPLeg=HP*d2Legendary;
+AttLeg=Attack*d2Legendary;
+DefLeg=Defense*d2Legendary;
+SpAtkLeg=Sp_Atk*d2Legendary;
+SpDefLeg=Sp_Def*d2Legendary;
+SpeedLeg=Speed*d2Legendary;
+
+HPEgg=HP*d4Egg0;
+AttEgg=Attack*d4Egg0; 
+DefEgg=Defense*d4Egg0; 
+SpAtkEgg=Sp_Atk*d4Egg0;
+SpDefEgg=Sp_Def*d4Egg0;
+SpeedEgg=Speed*d4Egg0;
+
+LegEgg=d2Legendary*d4Egg0;
+HPLegEgg=HP*d2Legendary*d4Egg0;
+AttLegEgg=Attack*d2Legendary*d4Egg0;
+DefLegEgg=Defense*d2Legendary*d4Egg0;
+SpAtkLegEgg=Sp_Atk*d2Legendary*d4Egg0;
+SpDefLegEgg=Sp_Def*d2Legendary*d4Egg0;
+SpeedLegEgg=Speed*d2Legendary*d4Egg0;
+
 /*Quadratic term Second order*/
 HP_Sq = HP*HP;
 Attack_Sq = Attack*Attack;
@@ -45,12 +57,51 @@ SpAtkSpDef= Sp_Atk*Sp_Def;
 SpAtkSpeed=Sp_Atk*Speed;
 SpDefSpeeds=Sp_Def*Speed;
 /* Interaction Numerical and Dummy term Second order */
-HP_SqLeg= HP_SqGen2=  HP_SqGen4=
-Attack_SqLeg=  Attack_SqGen2= Attack_SqGen4=
-Defense_SqLeg=  Defense_SqGen2= Defense_SqGen4=
-SpAtk_SqLeg=  SpAtk_SqGen2= SpAtk_SqGen4=
-Sp_Def_SqLeg=   Sp_Def_SqGen2= Sp_Def_SqGen4=
-Speed_SqLeg= Speed_SqGen2= Speed_SqGen4=
+HP_SqLeg=HP_Sq*d2Legendary;
+Attack_SqLeg=Attack_Sq*d2Legendary;
+Defense_SqLeg=Defense_Sq* d2Legendary ;
+SpAtk_SqLeg= SpAtk_Sq *d2Legendary;
+SpDef_SqLeg=SpDef_Sq  *d2Legendary ;
+Speed_SqLeg=Speed_Sq *d2Legendary;
+
+HP_SqEgg=HP_Sq*d4Egg0;
+Attack_SqEgg=Attack_Sq*d4Egg0;
+Defense_SqEgg=Defense_Sq* d4Egg0 ;
+SpAtk_SqEgg= SpAtk_Sq *d4Egg0;
+SpDef_SqEgg=SpDef_Sq  *d4Egg0 ;
+Speed_SqEgg=Speed_Sq *d4Egg0;
+
+HPAttLeg=HP*Attack*d2Legendary;
+HPDefLeg=HP*Defense*d2Legendary;
+HPSpAtkLeg=HP*Sp_Atk*d2Legendary;
+HPSpDefLeg=HP*Sp_Def*d2Legendary;
+HPSpeedLeg=HP*Speed*d2Legendary;
+AttDefLeg=Attack*Defense*d2Legendary ;
+AttSpAtkLeg=Attack *Sp_Atk*d2Legendary;
+AttSpDefLeg=Attack *Sp_Def*d2Legendary;
+AttSpeedLeg=Attack*Speed*d2Legendary;
+DefSpAtkLeg= Defense*Sp_Atk*d2Legendary;
+DefSpDefLeg= Defense*Sp_Def*d2Legendary;
+DefSpeedLeg=Defense*Speed*d2Legendary;
+SpAtkSpDefLeg= Sp_Atk*Sp_Def*d2Legendary;
+SpAtkSpeedLeg=Sp_Atk*Speed*d2Legendary;
+SpDefSpeedsLeg=Sp_Def*Speed*d2Legendary;
+
+HPAttEgg=HP*Attack*d4Egg0;
+HPDefEgg=HP*Defense*d4Egg0;
+HPSpAtkEgg=HP*Sp_Atk*d4Egg0;
+HPSpDefEgg=HP*Sp_Def*d4Egg0;
+HPSpeedEgg=HP*Speed*d4Egg0;
+AttDefEgg=Attack*Defense*d4Egg0 ;
+AttSpAtkEgg=Attack *Sp_Atk*d4Egg0;
+AttSpDefEgg=Attack *Sp_Def*d4Egg0;
+AttSpeedEgg=Attack*Speed*d4Egg0;
+DefSpAtkEgg= Defense*Sp_Atk*d4Egg0;
+DefSpDefEgg= Defense*Sp_Def*d4Egg0;
+DefSpeedEgg=Defense*Speed*d4Egg0;
+SpAtkSpDefEgg= Sp_Atk*Sp_Def*d4Egg0;
+SpAtkSpeedEgg=Sp_Atk*Speed*d4Egg0;
+SpDefSpeedsEgg=Sp_Def*Speed*d4Egg0;
 
 datalines;
 1	Bulbasaur	2	318	45	49	49	65	65	45	1	FALSE	TRUE	2	FALSE	0.71	6.9	45
@@ -780,11 +831,10 @@ Total	HP	Attack	Defense	Sp_Atk	Sp_Def	Speed	Pr_Male		Height_m	Weight_kg
 */	
 
 
-/**proc reg ;
+/*proc reg ;
 id Number;
-model Catch_Rate= 	HP	Attack	Defense	Sp_Atk	Sp_Def	Speed Height_m	Weight_kg d1Type d2Legendary d3Gender 
-					d4Egg0 d5Egg1 d6Mega d7Gen1 
-					d8Gen2 d9Gen3 d10Gen4 d11Gen5 / selection=rsquare adjrsq cp best=2 start=7 stop=15;plot cp.*np./cmallows=blue chocking=red;
+model Catch_Rate= 	HP	Attack	Defense	Sp_Atk	Sp_Def	Speed  Height_m	Weight_kg d1Type d2Legendary d3Gender 
+					d4Egg0 d5Egg1 d6Mega  /selection=rsquare adjrsq cp best=2 start=7 stop=15;plot cp.*np./cmallows=blue chocking=red;
 /*selection = backward slstay=0.1;
 selection = forward slentry=0.1;
 selection=stepwise slentry=0.1 slstay=0.1;
@@ -792,9 +842,10 @@ selection=rsquare best=2;plot rsq.*np.;
 selection=rsquare adjrsq mse sse best=2;plot adjrsq.*np.;
 selection=rsquare adjrsq cp best=2 start=7 stop=15;plot cp.*np./cmallows=blue chocking=red;
 */
-proc reg ;
+/*
+
 id Number;
-/*First_Main: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4;
+/*First_Main: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0;
 First_Inter: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4
 	HPLeg HPGen2 HPGen4 AttLeg AttGen2 AttGen4 DefLeg DefGen2 DefGen4 SpAtkLeg SpAtkGen2 SpAtkGen4 
 	SpDefLeg SpDefGen2 SpDefGen4 SpeedLeg SpeedGen2 SpeedGen4 ;
@@ -803,13 +854,76 @@ First_Inter: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendar
 model  Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4
 	SpeedGen2 ;
 */
+/*
 Second_Main: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4
 	HP_Sq Attack_Sq Defense_Sq SpAtk_Sq Sp_Def_Sq  Speed_Sq;
 Second_Inter: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4
 	HP_Sq Attack_Sq Defense_Sq SpAtk_Sq Sp_Def_Sq  Speed_Sq
 	HPAtt HPDef HPSpAtk HPSpDef HPSpeed AttDef AttSpAtk AttSpDef AttSpeed DefSpAtk DefSpDef DefSpeed 
     SpAtkSpDef SpAtkSpeed SpDefSpeeds
+/*Correlation
+proc corr;
+variable HP	Attack	Defense	Sp_Atk	Sp_Def	Speed   d2Legendary d4Egg0;
+proc reg ;
+model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0 d5Egg1;vif tol collin
 ;
+/*ridge
+proc reg outvif outset=ridgeSet ridge=0 to 0.5 by 0.05;
+id Number;
+model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0;
 
-	run;
+proc print data=ridgeSet;
+*/
+proc reg;
+id Number;
+/*
+First_Main: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0;
+First_Inter: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0
+	HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
+	HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
+	LegEgg HPLegEgg AttLegEgg DefLegEgg SpAtkLegEgg SpDefLegEgg SpeedLegEgg;
+test HPLeg ,  AttLeg ,  DefLeg  , SpAtkLeg,   SpDefLeg  , SpeedLeg  , 
+	HPEgg  , AttEgg , DefEgg ,  SpAtkEgg  , SpDefEgg  , SpeedEgg,
+	LegEgg, HPLegEgg, AttLegEgg, DefLegEgg, SpAtkLegEgg, SpDefLegEgg, SpeedLegEgg;/*delet this line*//*
+First: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0
+	HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
+	HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg;
+	test HPLeg ,  AttLeg ,  DefLeg  , SpAtkLeg,   SpDefLeg  , SpeedLeg  , 
+	HPEgg  , AttEgg , DefEgg ,  SpAtkEgg  , SpDefEgg  , SpeedEgg;
+*/
+Second_Com: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0
+	HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
+	HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
+	HP_Sq Attack_Sq Defense_Sq SpAtk_Sq SpDef_Sq Speed_Sq 
+	HPAtt HPDef HPSpAtk HPSpDef HPSpeed AttDef AttSpAtk AttSpDef AttSpeed 
+	DefSpAtk DefSpDef DefSpeed SpAtkSpDef SpAtkSpeed SpDefSpeeds 
+	HP_SqLeg Attack_SqLeg Defense_SqLeg SpAtk_SqLeg SpDef_SqLeg Speed_SqLeg 
+	HP_SqEgg Attack_SqEgg Defense_SqEgg SpAtk_SqEgg SpDef_SqEgg Speed_SqEgg 
+	HPAttLeg HPDefLeg HPSpAtkLeg HPSpDefLeg HPSpeedLeg AttDefLeg AttSpAtkLeg AttSpDefLeg AttSpeedLeg 
+	DefSpAtkLeg DefSpDefLeg DefSpeedLeg SpAtkSpDefLeg SpAtkSpeedLeg SpDefSpeedsLeg 
+	HPAttEgg HPDefEgg HPSpAtkEgg HPSpDefEgg HPSpeedEgg AttDefEgg AttSpAtkEgg AttSpDefEgg 
+	AttSpeedEgg DefSpAtkEgg /*DefSpDefEgg DefSpeedEgg SpAtkSpDefEgg SpAtkSpeedEgg SpDefSpeedsEgg;
+Second_Quan:model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed 
+	HP_Sq Attack_Sq Defense_Sq SpAtk_Sq SpDef_Sq Speed_Sq 
+	HPAtt HPDef HPSpAtk HPSpDef HPSpeed AttDef AttSpAtk AttSpDef AttSpeed 
+	DefSpAtk DefSpDef DefSpeed SpAtkSpDef SpAtkSpeed SpDefSpeeds ;*/;
+	Sec_all:test HP_Sq, Attack_Sq, Defense_Sq, SpAtk_Sq ,SpDef_Sq ,Speed_Sq ,
+	HPAtt ,HPDef ,HPSpAtk, HPSpDef, HPSpeed, AttDef ,AttSpAtk, AttSpDef, AttSpeed ,
+	DefSpAtk, DefSpDef, DefSpeed, SpAtkSpDef, SpAtkSpeed ,SpDefSpeeds ,
+	HP_SqLeg, Attack_SqLeg, Defense_SqLeg, SpAtk_SqLeg, SpDef_SqLeg ,Speed_SqLeg ,
+	HP_SqEgg, Attack_SqEgg, Defense_SqEgg, SpAtk_SqEgg ,SpDef_SqEgg ,Speed_SqEgg, 
+	HPAttLeg, HPDefLeg ,HPSpAtkLeg, HPSpDefLeg, HPSpeedLeg ,AttDefLeg, AttSpAtkLeg, AttSpDefLeg, AttSpeedLeg ,
+	DefSpAtkLeg, DefSpDefLeg ,DefSpeedLeg ,SpAtkSpDefLeg, SpAtkSpeedLeg, SpDefSpeedsLeg ,
+	HPAttEgg ,HPDefEgg ,HPSpAtkEgg ,HPSpDefEgg, HPSpeedEgg, AttDefEgg ,AttSpAtkEgg ,AttSpDefEgg ,
+	AttSpeedEgg, DefSpAtkEgg;
+	Sec_qua:test HP_Sq, Attack_Sq, Defense_Sq, SpAtk_Sq ,SpDef_Sq ,Speed_Sq ,
+			HP_SqLeg, Attack_SqLeg, Defense_SqLeg, SpAtk_SqLeg, SpDef_SqLeg ,Speed_SqLeg ,
+			HP_SqEgg, Attack_SqEgg, Defense_SqEgg, SpAtk_SqEgg ,SpDef_SqEgg ,Speed_SqEgg;
+	Sec_inter:test HPAtt ,HPDef ,HPSpAtk, HPSpDef, HPSpeed, AttDef ,AttSpAtk, AttSpDef, AttSpeed ,
+			DefSpAtk, DefSpDef, DefSpeed, SpAtkSpDef, SpAtkSpeed ,SpDefSpeeds ,
+			HPAttLeg, HPDefLeg ,HPSpAtkLeg, HPSpDefLeg, HPSpeedLeg ,AttDefLeg, AttSpAtkLeg, AttSpDefLeg, AttSpeedLeg ,
+			DefSpAtkLeg, DefSpDefLeg ,DefSpeedLeg ,SpAtkSpDefLeg, SpAtkSpeedLeg, SpDefSpeedsLeg ,
+			HPAttEgg ,HPDefEgg ,HPSpAtkEgg ,HPSpDefEgg, HPSpeedEgg, AttDefEgg ,AttSpAtkEgg ,AttSpDefEgg ,
+			AttSpeedEgg, DefSpAtkEgg;
+run;
 

@@ -942,14 +942,20 @@ model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0
 		HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
 		HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
 		Speed_Sq HPAtt AttDef AttSpAtk/r influence;
-	plot y*predicted.*/
+	plot Catch_Rate*predicted.
 proc reg outset=jack;
 model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0 
 		HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
 		HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
 		Speed_Sq HPAtt AttDef AttSpAtk/press;
 proc print data=jack;
-	var _PRESS_;
+	var _PRESS_;*/
+proc reg outset=jack;
+model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0 
+		HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
+		HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
+		Speed_Sq HPAtt AttDef AttSpAtk;
+		plot Catch_Rate*predicted.;
 		
 run;
 

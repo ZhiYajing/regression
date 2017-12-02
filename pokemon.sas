@@ -2,17 +2,17 @@ ods html close;
 ods html;
 data pokemon;
 input Number	Name$		Type	Total	HP	Attack	Defense	Sp_Atk	Sp_Def	Speed	Generation	isLegendary$	hasGender$	Egg_Group	hasMegaEvolution$	Height_m	Weight_kg	Catch_Rate;
-if Type = "1" then d1=1; else d1=0;
-if isLegendary="TRUE" then d2=1; else d2=0;
-if hasGender="TRUE" then d3=1; else d3=0;
-if Egg_Group="0" then d4=1; else d4=0;
-if Egg_Group="1" then d5=1; else d5=0;
-if hasMegaEvolution="TRUE" then d6=1; else d6=0;
-if Generation="1" then d7=1; else d7=0;
-if Generation="2" then d8=1; else d8=0;
-if Generation="3" then d9=1; else d9=0;
-if Generation="4" then d10=1; else d10=0;
-if Generation="5" then d11=1; else d11=0;
+if Type = "1" then d1Type=1; else d1Type=0;
+if isLegendary="TRUE" then d2Legendary=1; else d2Legendary=0;
+if hasGender="TRUE" then d3Gender=1; else d3Gender=0;
+if Egg_Group="0" then d4Egg0=1; else d4Egg0=0;
+if Egg_Group="1" then d5Egg1=1; else d5Egg1=0;
+if hasMegaEvolution="TRUE" then d6Mega=1; else d6Mega=0;
+if Generation="1" then d7Gen1=1; else d7Gen1=0;
+if Generation="2" then d8Gen2=1; else d8Gen2=0;
+if Generation="3" then d9Gen3=1; else d9Gen3=0;
+if Generation="4" then d10Gen4=1; else d10Gen4=0;
+if Generation="5" then d11Gen5=1; else d11Gen5=0;
 datalines;
 1	Bulbasaur	2	318	45	49	49	65	65	45	1	FALSE	TRUE	2	FALSE	0.71	6.9	45
 2	Ivysaur	2	405	60	62	63	80	80	60	1	FALSE	TRUE	2	FALSE	0.99	13	45
@@ -743,5 +743,5 @@ proc print;
 
 proc reg ;
 id Number;
-model Catch_Rate= 	HP	Attack	Defense	Sp_Atk	Sp_Def	Speed Height_m	Weight_kg d1-d11;
+model Catch_Rate= 	HP	Attack	Defense	Sp_Atk	Sp_Def	Speed Height_m	Weight_kg d1Type d2Legendary d3Gender d4Egg0 d5Egg1 d6Mega d7Gen1 d8Gen2 d9Gen3 d10Gen4 d11Gen5;
 run;

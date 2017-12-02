@@ -826,6 +826,7 @@ datalines;
 720	Hoopa	2	600	80	110	60	150	130	70	6	TRUE	FALSE	0	FALSE	0.51	9	3
 721	Volcanion	2	600	80	110	120	130	90	70	6	TRUE	FALSE	0	FALSE	1.7	195	3
 ;
+
 /*Type	Generation	isLegendary hasGender Egg_Group hasMegaEvolution	
 Total	HP	Attack	Defense	Sp_Atk	Sp_Def	Speed	Pr_Male		Height_m	Weight_kg
 */	
@@ -890,7 +891,7 @@ First: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Eg
 	HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg;
 	test HPLeg ,  AttLeg ,  DefLeg  , SpAtkLeg,   SpDefLeg  , SpeedLeg  , 
 	HPEgg  , AttEgg , DefEgg ,  SpAtkEgg  , SpDefEgg  , SpeedEgg;
-*/
+*//*
 Second_Com: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0
 	HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
 	HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
@@ -906,7 +907,7 @@ Second_Com: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary
 Second_Quan:model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed 
 	HP_Sq Attack_Sq Defense_Sq SpAtk_Sq SpDef_Sq Speed_Sq 
 	HPAtt HPDef HPSpAtk HPSpDef HPSpeed AttDef AttSpAtk AttSpDef AttSpeed 
-	DefSpAtk DefSpDef DefSpeed SpAtkSpDef SpAtkSpeed SpDefSpeeds ;*/;
+	DefSpAtk DefSpDef DefSpeed SpAtkSpDef SpAtkSpeed SpDefSpeeds ;;
 	Sec_all:test HP_Sq, Attack_Sq, Defense_Sq, SpAtk_Sq ,SpDef_Sq ,Speed_Sq ,
 	HPAtt ,HPDef ,HPSpAtk, HPSpDef, HPSpeed, AttDef ,AttSpAtk, AttSpDef, AttSpeed ,
 	DefSpAtk, DefSpDef, DefSpeed, SpAtkSpDef, SpAtkSpeed ,SpDefSpeeds ,
@@ -916,7 +917,7 @@ Second_Quan:model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed
 	DefSpAtkLeg, DefSpDefLeg ,DefSpeedLeg ,SpAtkSpDefLeg, SpAtkSpeedLeg, SpDefSpeedsLeg ,
 	HPAttEgg ,HPDefEgg ,HPSpAtkEgg ,HPSpDefEgg, HPSpeedEgg, AttDefEgg ,AttSpAtkEgg ,AttSpDefEgg ,
 	AttSpeedEgg, DefSpAtkEgg;
-	Sec_qua:test HP_Sq, Attack_Sq, Defense_Sq, SpAtk_Sq ,SpDef_Sq ,Speed_Sq ,
+	Sec_quad:test HP_Sq, Attack_Sq, Defense_Sq, SpAtk_Sq ,SpDef_Sq ,Speed_Sq ,
 			HP_SqLeg, Attack_SqLeg, Defense_SqLeg, SpAtk_SqLeg, SpDef_SqLeg ,Speed_SqLeg ,
 			HP_SqEgg, Attack_SqEgg, Defense_SqEgg, SpAtk_SqEgg ,SpDef_SqEgg ,Speed_SqEgg;
 	Sec_inter:test HPAtt ,HPDef ,HPSpAtk, HPSpDef, HPSpeed, AttDef ,AttSpAtk, AttSpDef, AttSpeed ,
@@ -925,5 +926,18 @@ Second_Quan:model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed
 			DefSpAtkLeg, DefSpDefLeg ,DefSpeedLeg ,SpAtkSpDefLeg, SpAtkSpeedLeg, SpDefSpeedsLeg ,
 			HPAttEgg ,HPDefEgg ,HPSpAtkEgg ,HPSpDefEgg, HPSpeedEgg, AttDefEgg ,AttSpAtkEgg ,AttSpDefEgg ,
 			AttSpeedEgg, DefSpAtkEgg;
+	Sec_quad_Num: test HP_Sq, Attack_Sq, Defense_Sq, SpAtk_Sq ,SpDef_Sq ,Speed_Sq ;
+	Sec_quad_Qual:test HP_SqLeg, Attack_SqLeg, Defense_SqLeg, SpAtk_SqLeg, SpDef_SqLeg ,Speed_SqLeg ,
+			HP_SqEgg, Attack_SqEgg, Defense_SqEgg, SpAtk_SqEgg ,SpDef_SqEgg ,Speed_SqEgg;
+	sec_int_Num: test HPAtt ,HPDef ,HPSpAtk, HPSpDef, HPSpeed, AttDef ,AttSpAtk, AttSpDef, AttSpeed ,
+			DefSpAtk, DefSpDef, DefSpeed, SpAtkSpDef, SpAtkSpeed ,SpDefSpeeds ;
+	sec_int_Qual:test DefSpAtkLeg, DefSpDefLeg ,DefSpeedLeg ,SpAtkSpDefLeg, SpAtkSpeedLeg, SpDefSpeedsLeg ,
+			HPAttEgg ,HPDefEgg ,HPSpAtkEgg ,HPSpDefEgg, HPSpeedEgg, AttDefEgg ,AttSpAtkEgg ,AttSpDefEgg ,
+			AttSpeedEgg, DefSpAtkEgg;*/
+model  Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0 
+		HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
+		HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
+		Speed_Sq HPAtt AttDef AttSpAtk;
+		plot Catch_Rate*predicted.;
 run;
 

@@ -13,6 +13,15 @@ if Generation="2" then d8Gen2=1; else d8Gen2=0;
 if Generation="3" then d9Gen3=1; else d9Gen3=0;
 if Generation="4" then d10Gen4=1; else d10Gen4=0;
 if Generation="5" then d11Gen5=1; else d11Gen5=0;
+/*HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4*/
+/*Interaction term First order*/
+HPLeg=HP*d2Legendary;HPGen2=HP*d8Gen2;HPGen4=HP*d10Gen4;
+AttLeg=Attack*d2Legendary;AttGen2=Attack*d8Gen2;AttGen4=Attack*d10Gen4;
+DefLeg=Defense*d2Legendary;DefGen2=Defense*d8Gen2;DefGen4=Defense*d10Gen4;
+SpAtkLeg=Sp_Atk*d2Legendary;SpAtkGen2=Sp_Atk*d8Gen2;SpAtkGen4=Sp_Atk*d10Gen4;
+SpDefLeg=Sp_Def*d2Legendary;SpDefGen2=Sp_Def*d8Gen2;SpDefGen4=Sp_Def*d10Gen4;
+SpeedLeg=Speed*d2Legendary;SpeedGen2=Speed*d8Gen2;SpeedGen4=Speed*d10Gen4;
+
 datalines;
 1	Bulbasaur	2	318	45	49	49	65	65	45	1	FALSE	TRUE	2	FALSE	0.71	6.9	45
 2	Ivysaur	2	405	60	62	63	80	80	60	1	FALSE	TRUE	2	FALSE	0.99	13	45
@@ -739,9 +748,30 @@ datalines;
 /*Type	Generation	isLegendary hasGender Egg_Group hasMegaEvolution	
 Total	HP	Attack	Defense	Sp_Atk	Sp_Def	Speed	Pr_Male		Height_m	Weight_kg
 */	
-proc print;
 
+
+/**proc reg ;
+id Number;
+model Catch_Rate= 	HP	Attack	Defense	Sp_Atk	Sp_Def	Speed Height_m	Weight_kg d1Type d2Legendary d3Gender 
+					d4Egg0 d5Egg1 d6Mega d7Gen1 
+					d8Gen2 d9Gen3 d10Gen4 d11Gen5 / selection=rsquare adjrsq cp best=2 start=7 stop=15;plot cp.*np./cmallows=blue chocking=red;
+/*selection = backward slstay=0.1;
+selection = forward slentry=0.1;
+selection=stepwise slentry=0.1 slstay=0.1;
+selection=rsquare best=2;plot rsq.*np.;
+selection=rsquare adjrsq mse sse best=2;plot adjrsq.*np.;
+selection=rsquare adjrsq cp best=2 start=7 stop=15;plot cp.*np./cmallows=blue chocking=red;
+*/
 proc reg ;
 id Number;
-model Catch_Rate= 	HP	Attack	Defense	Sp_Atk	Sp_Def	Speed Height_m	Weight_kg d1Type d2Legendary d3Gender d4Egg0 d5Egg1 d6Mega d7Gen1 d8Gen2 d9Gen3 d10Gen4 d11Gen5;
-run;
+/*First_Main: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4;
+First_Inter: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4
+	HPLeg HPGen2 HPGen4 AttLeg AttGen2 AttGen4 DefLeg DefGen2 DefGen4 SpAtkLeg SpAtkGen2 SpAtkGen4 
+	SpDefLeg SpDefGen2 SpDefGen4 SpeedLeg SpeedGen2 SpeedGen4 ;
+	test HPLeg, HPGen2, HPGen4, AttLeg, AttGen2, AttGen4, DefLeg, DefGen2, DefGen4, SpAtkLeg, SpAtkGen2, SpAtkGen4,
+	SpDefLeg, SpDefGen2, SpDefGen4 ,SpeedLeg, SpeedGen2, SpeedGen4;
+model  Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d8Gen2 d10Gen4
+	SpeedGen2 ;
+*/
+	run;
+

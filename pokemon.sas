@@ -40,6 +40,9 @@ Defense_Sq =Defense*Defense;
 SpAtk_Sq =Sp_Atk*Sp_Atk;
 SpDef_Sq =Sp_Def*Sp_Def;
 Speed_Sq =Speed*Speed;
+
+HP_Sq_inv = log((HP*HP));
+SpDef_Sq_inv =1/(Sp_Def*Sp_Def);
 /*Interaction Numerical term Second order*/
 HPAtt=HP*Attack;
 HPDef=HP*Defense;
@@ -949,7 +952,7 @@ model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0
 		HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
 		Speed_Sq HPAtt AttDef AttSpAtk/press;
 proc print data=jack;
-	var _PRESS_;*/
+	var _PRESS_;
 proc reg outset=jack;
 model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0 
 		HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
@@ -957,5 +960,57 @@ model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0
 		Speed_Sq HPAtt AttDef AttSpAtk;
 		plot Catch_Rate*predicted.;
 		
+proc standard data=pokemon mean=0 std=1 out=zpoke;
+	var  HP Attack Defense Sp_Atk Sp_Def  Speed;
+data newpokemon;
+	set zpoke;
+	u1=HP ;u2=Attack ;u3=Defense; u4=Sp_Atk; u5=Sp_Def;  u6=Speed;
+	u1sq=u1*u1;u2sq=u2*u2;u3sq=u3*u3;u4sq=u4*u4;u5sq=u5*u5;u6sq=u6*u6;
+proc reg corr data =pokemon;
+	model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed
+	HP_Sq Attack_Sq Defense_Sq SpAtk_Sq SpDef_Sq Speed_Sq ;
+proc reg corr data=newpokemon;
+	model Catch_Rate=u1 u2 u3 u4 u5 u6 u1sq u2sq u3sq u4sq u5sq u6sq;
+proc corr data =pokemon;
+	variable HP Attack Defense Sp_Atk Sp_Def  Speed
+	HP_Sq Attack_Sq Defense_Sq SpAtk_Sq SpDef_Sq Speed_Sq ;
+proc corr data=newpokemon;
+	variable u1 u2 u3 u4 u5 u6 u1sq u2sq u3sq u4sq u5sq u6sq;
+	
+proc transreg detail ss2 plots=(residuals);
+model boxcox(Catch_Rate)=identity( HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0 
+		HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
+		HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
+		Speed_Sq HPAtt AttDef AttSpAtk);
+proc standard data=pokemon mean=0 std=1 out=zpoke;
+	var  HP Attack Defense Sp_Atk Sp_Def  Speed;
+data newpokemon;
+	set zpoke;
+	u1=HP ;u2=Attack ;u3=Defense; u4=Sp_Atk; u5=Sp_Def;  u6=Speed;
+	u1sq=u1*u1;u2sq=u2*u2;u3sq=u3*u3;u4sq=u4*u4;u5sq=u5*u5;u6sq=u6*u6;
+proc transreg data=newpokemon detail ss2 plots=(residuals);
+model boxcox(Catch_Rate/geo)=identity( u1 u2 u3 u4 u5 u6 u1sq u2sq u3sq u4sq u5sq u6sq);*/
+proc gplot;
+symbol v= plus i=r;
+plot Catch_Rate*HP;
+plot Catch_Rate*Attack; 
+plot Catch_Rate*Defense;
+plot Catch_Rate* Sp_Atk;
+plot Catch_Rate* Sp_Def;
+plot Catch_Rate* Speed;
+plot Catch_Rate*HP_Sq;
+plot Catch_Rate*Attack_Sq; 
+plot Catch_Rate*Defense_Sq;
+plot Catch_Rate* SpAtk_Sq;
+plot Catch_Rate* SpDef_Sq;
+plot Catch_Rate* Speed_Sq;
+plot Catch_Rate* HP_Sq_inv;
+plot Catch_Rate* SpDef_Sq_inv;
+proc reg;
+	model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0 
+		HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
+		HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
+		Speed_Sq HPAtt AttDef AttSpAtk/r influence ;
+
 run;
 

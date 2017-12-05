@@ -1007,10 +1007,26 @@ plot Catch_Rate* Speed_Sq;
 plot Catch_Rate* HP_Sq_inv;
 plot Catch_Rate* SpDef_Sq_inv;
 proc reg;
-	model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0 
+Second_Com: model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0
+	HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
+	HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
+	HP_Sq Attack_Sq Defense_Sq SpAtk_Sq SpDef_Sq Speed_Sq 
+	HPAtt HPDef HPSpAtk HPSpDef HPSpeed AttDef AttSpAtk AttSpDef AttSpeed 
+	DefSpAtk DefSpDef DefSpeed SpAtkSpDef SpAtkSpeed SpDefSpeeds 
+	HP_SqLeg Attack_SqLeg Defense_SqLeg SpAtk_SqLeg SpDef_SqLeg Speed_SqLeg 
+	HP_SqEgg Attack_SqEgg Defense_SqEgg SpAtk_SqEgg SpDef_SqEgg Speed_SqEgg 
+	HPAttLeg HPDefLeg HPSpAtkLeg HPSpDefLeg HPSpeedLeg AttDefLeg AttSpAtkLeg AttSpDefLeg AttSpeedLeg 
+	DefSpAtkLeg DefSpDefLeg DefSpeedLeg SpAtkSpDefLeg SpAtkSpeedLeg SpDefSpeedsLeg 
+	HPAttEgg HPDefEgg HPSpAtkEgg HPSpDefEgg HPSpeedEgg AttDefEgg AttSpAtkEgg AttSpDefEgg 
+	AttSpeedEgg DefSpAtkEgg/pcorr1 pcorr2;
+	test HP, Attack, Defense, Sp_Atk, Sp_Def,  Speed, d2Legendary, d4Egg0 ,
+		HPLeg,   AttLeg ,  DefLeg ,  SpAtkLeg ,  SpDefLeg ,  SpeedLeg   ,
+		HPEgg ,  AttEgg,  DefEgg,   SpAtkEgg ,  SpDefEgg ,  SpeedEgg,
+		Speed_Sq, HPAtt, AttDef ,AttSpAtk;
+/*Reduced:	model Catch_Rate= HP Attack Defense Sp_Atk Sp_Def  Speed d2Legendary d4Egg0 
 		HPLeg   AttLeg   DefLeg   SpAtkLeg   SpDefLeg   SpeedLeg   
 		HPEgg   AttEgg  DefEgg   SpAtkEgg   SpDefEgg   SpeedEgg
-		Speed_Sq HPAtt AttDef AttSpAtk/r influence ;
-
+		Speed_Sq HPAtt AttDef AttSpAtk ;
+*/
 run;
 
